@@ -606,7 +606,7 @@ class BDDLBaseDomain(SingleArmEnv):
                         mujoco_objects=self.fixtures_dict[object_name],
                         x_ranges=x_ranges,
                         y_ranges=y_ranges,
-                        rotation=yaw_rotation,
+                        rotation=[0, 0] if yaw_rotation is None else yaw_rotation,
                         rotation_axis="z",
                         z_offset=self.z_offset,  # -self.table_full_size[2],
                         ensure_object_boundary_in_range=False,
@@ -616,6 +616,16 @@ class BDDLBaseDomain(SingleArmEnv):
                     self.placement_initializer.append_sampler(fixture_sampler)
                 else:
                     # This is to place movable objects.
+                    object_rotation = (
+                        yaw_rotation
+                        if yaw_rotation is not None
+                        else self.objects_dict[object_name].rotation
+                    )
+                    object_rotation_axis = (
+                        "z"
+                        if yaw_rotation is not None
+                        else self.objects_dict[object_name].rotation_axis
+                    )
                     region_sampler = get_region_samplers(
                         problem_name, mapping_inv[target_name]
                     )(
@@ -623,8 +633,8 @@ class BDDLBaseDomain(SingleArmEnv):
                         self.objects_dict[object_name],
                         x_ranges=x_ranges,
                         y_ranges=y_ranges,
-                        rotation=self.objects_dict[object_name].rotation,
-                        rotation_axis=self.objects_dict[object_name].rotation_axis,
+                        rotation=object_rotation,
+                        rotation_axis=object_rotation_axis,
                         reference_pos=self.workspace_offset,
                     )
                     self.placement_initializer.append_sampler(region_sampler)

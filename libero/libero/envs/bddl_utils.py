@@ -2,6 +2,7 @@ from bddl.parsing import *
 
 import itertools
 import numpy as np
+from .perturbation_config import parse_perturbation_config_group
 
 pi = np.pi
 
@@ -16,7 +17,7 @@ def get_regions(t, regions, group):
             "target": None,
             "ranges": [],
             "extra": [],
-            "yaw_rotation": [0, 0],
+            "yaw_rotation": None,
             "rgba": [0, 0, 1, 0],
         }
         for attribute in region[1:]:
@@ -97,6 +98,7 @@ def robosuite_parse_problem(problem_filename):
         fixtures = {}
         regions = {}
         scene_properties = {}
+        perturbation_config = {}
         language_instruction = ""
         while tokens:
             group = tokens.pop()
@@ -144,6 +146,8 @@ def robosuite_parse_problem(problem_filename):
                 get_regions(t, regions, group)
             elif t == ":scene_properties":
                 get_scenes(t, scene_properties, group)
+            elif t == ":perturbation_config":
+                perturbation_config = parse_perturbation_config_group(group)
             elif t == ":language":
                 group.pop(0)
                 language_instruction = group
@@ -161,6 +165,7 @@ def robosuite_parse_problem(problem_filename):
             "regions": regions,
             "objects": objects,
             "scene_properties": scene_properties,
+            "perturbation_config": perturbation_config,
             "initial_state": initial_state,
             "goal_state": goal_state,
             "language_instruction": language_instruction,

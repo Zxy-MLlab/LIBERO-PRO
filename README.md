@@ -199,6 +199,69 @@ To specify combined-type generalization evaluation, modify `evaluation_config.ya
 
 *Note: task generalization (`use_task: true`) cannot be combined with others.*
 
+## BDDL-Driven Robustness Evaluation
+
+The existing LIBERO suite folders provide the clean baseline. The robustness
+extension adds seven perturbation cases for the same 40 tasks in
+LIBERO-Spatial, LIBERO-Object, LIBERO-Goal, and LIBERO-10. The 280 perturbation
+BDDL files and shared init files remain in the
+[LIBERO-Pro dataset repository](https://huggingface.co/datasets/zhouxueyang/LIBERO-Pro).
+
+Download the dataset without copying its files into the source tree:
+
+```bash
+huggingface-cli download zhouxueyang/LIBERO-Pro \
+  --repo-type dataset \
+  --local-dir ./libero_pro_dataset
+```
+
+The available cases are:
+
+```text
+clean
+visual_noise_glare
+camera_view_angle
+runtime_object_move
+object_texture
+view_occlusion
+object_shape
+initial_pose_position_angle
+```
+
+All task-specific perturbation parameters are read from each BDDL file's
+`:perturbation_config` section. Runtime object movement uses a near-grasp
+trigger with a maximum end-effector-to-target distance of `0.09 m` and a
+step-160 fallback.
+
+Regenerate the seven perturbation categories from the repository's clean
+LIBERO BDDL files when modifying the schema:
+
+```bash
+python scripts/generate_40task_robustness_bddls.py --clean
+```
+
+Validate the complete 280-file perturbation set:
+
+```bash
+python scripts/validate_40task_robustness_bddls.py \
+  --dataset-root ./libero_pro_dataset
+```
+
+Run one model-independent environment smoke rollout:
+
+```bash
+python scripts/run_robustness_smoke_evaluation.py \
+  --dataset-root ./libero_pro_dataset \
+  --case runtime_object_move \
+  --suite libero_goal \
+  --task put_the_bowl_on_the_plate \
+  --steps 200
+```
+
+Model adapters should reuse
+`libero.libero.envs.robustness_perturbations` for observation transforms,
+simulator changes, scene validation, and runtime movement triggers.
+
 ## Evaluation on OpenVLA
 Below is a reference code snippet for conducting LIBERO-PRO generalization evaluation on OpenVLA. Please place LIBERO-PRO in the following directory:
 ```

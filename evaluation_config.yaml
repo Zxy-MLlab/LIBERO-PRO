@@ -21,3 +21,23 @@ perturbation_mapping:
   use_object: object
   use_language: lan
   use_task: task
+
+# BDDL-driven robustness extension. The dataset checkout should contain
+# bddl_files/, init_files/, and metadata/ as published on Hugging Face. The
+# clean case continues to use the repository's existing LIBERO suite BDDLs.
+robustness:
+  enabled: false
+  dataset_root: "./libero_pro_dataset"
+  cases:
+    - clean
+    - visual_noise_glare
+    - camera_view_angle
+    - runtime_object_move
+    - object_texture
+    - view_occlusion
+    - object_shape
+    - initial_pose_position_angle
+  runtime_object_move:
+    trigger: near_grasp
+    distance_threshold: 0.09
+    fallback_step: 160
