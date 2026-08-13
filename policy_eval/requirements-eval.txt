@@ -1,0 +1,8 @@
+# Extra packages used only by this split evaluator. LIBERO's own dependencies are
+# still installed from ../requirements.txt.
+future==0.18.2
+termcolor>=2,<3
+cloudpickle==2.1.0
+gym==0.25.2
+imageio>=2.22,<3
+imageio-ffmpeg>=0.4,<1

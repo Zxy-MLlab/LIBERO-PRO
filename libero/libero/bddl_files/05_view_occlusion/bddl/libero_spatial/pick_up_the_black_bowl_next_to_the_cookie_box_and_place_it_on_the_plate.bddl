@@ -1,0 +1,228 @@
+(define (problem LIBERO_Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language Pick the akita black bowl next to the cookies box and place it on the plate)
+    (:regions
+      (plate_region
+          (:target main_table)
+          (:ranges (
+              (0.05 0.19 0.07 0.21)
+            )
+          )
+      )
+      (next_to_plate_region
+          (:target main_table)
+          (:ranges (
+              (0.0 0.3 0.02 0.32)
+            )
+          )
+      )
+      (box_region
+          (:target main_table)
+          (:ranges (
+              (0.06 0.02 0.08 0.04)
+            )
+          )
+      )
+      (next_to_box_region
+          (:target main_table)
+          (:ranges (
+              (0.12 -0.08 0.14 -0.06)
+            )
+          )
+      )
+      (between_plate_ramekin_region
+          (:target main_table)
+          (:ranges (
+              (-0.06 0.19 -0.04 0.21)
+            )
+          )
+      )
+      (ramekin_region
+          (:target main_table)
+          (:ranges (
+              (-0.21 0.19 -0.19 0.21)
+            )
+          )
+      )
+      (next_to_ramekin_region
+          (:target main_table)
+          (:ranges (
+              (-0.19 0.31 -0.17 0.33)
+            )
+          )
+      )
+      (table_center
+          (:target main_table)
+          (:ranges (
+              (-0.1 -0.01 -0.05 0.01)
+            )
+          )
+      )
+      (table_front
+          (:target main_table)
+          (:ranges (
+              (0.19 -0.01 0.21 0.01)
+            )
+          )
+      )
+      (cabinet_region
+          (:target main_table)
+          (:ranges (
+              (0.02 -0.28 0.04 -0.26)
+            )
+          )
+          (:yaw_rotation (
+              (2.6613777765410678 2.7242096296128633)
+            )
+          )
+      )
+      (stove_region
+          (:target main_table)
+          (:ranges (
+              (-0.42 -0.15 -0.4 -0.13)
+            )
+          )
+      )
+      (top_region
+          (:target wooden_cabinet_1)
+      )
+      (middle_region
+          (:target wooden_cabinet_1)
+      )
+      (bottom_region
+          (:target wooden_cabinet_1)
+      )
+      (top_side
+          (:target wooden_cabinet_1)
+      )
+      (cook_region
+          (:target flat_stove_1)
+      )
+      (perturb_occ_bottle_1_init_region
+          (:target main_table)
+          (:ranges (
+              (-0.34 -0.3 -0.33 -0.29)
+            )
+          )
+          (:yaw_rotation (
+              (0.0 0.0)
+            )
+          )
+      )
+  )
+
+  (:fixtures
+    main_table - table
+    wooden_cabinet_1 - wooden_cabinet
+    flat_stove_1 - flat_stove
+  )
+
+  (:objects
+    akita_black_bowl_1 akita_black_bowl_2 - akita_black_bowl
+    cookies_1 - cookies
+    glazed_rim_porcelain_ramekin_1 - glazed_rim_porcelain_ramekin
+    plate_1 - plate
+    black_book_occluder_1 - black_book
+  )
+
+  (:obj_of_interest
+    akita_black_bowl_1
+    plate_1
+  )
+
+  (:init
+    (On akita_black_bowl_1 main_table_next_to_box_region)
+    (On akita_black_bowl_2 flat_stove_1_cook_region)
+    (On plate_1 main_table_plate_region)
+    (On cookies_1 main_table_box_region)
+    (On glazed_rim_porcelain_ramekin_1 main_table_ramekin_region)
+    (On wooden_cabinet_1 main_table_cabinet_region)
+    (On flat_stove_1 main_table_stove_region)
+    (On black_book_occluder_1 main_table_perturb_occ_bottle_1_init_region)
+  )
+
+  (:goal
+    (And (On akita_black_bowl_1 plate_1))
+  )
+
+  (:perturbation_config
+    (:case view_occlusion)
+    (:category view_occlusion)
+    (:source_suite libero_spatial)
+    (:source_task pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate)
+    (:bddl_only true)
+    (:detail stand_one_book_face_to_agentview_in_front_of_the_target_without_touching_goal_objects)
+    (:lighting
+      (:enabled false)
+      (:mode none)
+      (:ambient 1.0)
+      (:diffuse 1.0)
+      (:specular 1.0)
+    )
+    (:observation
+      (:enabled false)
+      (:mode none)
+      (:brightness 1.0)
+      (:sigma 0.0)
+    )
+    (:camera
+      (:enabled false)
+      (:mode none)
+      (:name agentview)
+      (:pos 0.0 0.0 0.0)
+      (:quat 1.0 0.0 0.0 0.0)
+    )
+    (:runtime_move
+      (:enabled false)
+      (:mode none)
+      (:object akita_black_bowl_1)
+      (:step 0)
+      (:delta_xy 0.0 0.0)
+      (:min_delta_norm 0.0)
+    )
+    (:object_appearance
+      (:enabled false)
+      (:mode none)
+      (:targets plate_1)
+      (:rgba 0.72 0.63 0.50 1.0)
+      (:override_material_rgba false)
+      (:disable_material_texture false)
+      (:apply_visible_geom_rgba false)
+    )
+    (:object_placement
+      (:enabled true)
+      (:mode front_occlusion)
+      (:reference akita_black_bowl_1)
+      (:front_direction 1.0 0.0)
+      (:between_object plate_1)
+      (:min_between_distance 0.24)
+      (:between_delta_xy 0.16 0.0)
+      (:avoid_targets plate_1)
+      (:min_avoid_distance 0.08)
+      (:targets black_book_occluder_1)
+      (:offsets_xy (
+        (0.080 0.000)
+      ))
+      (:target_quat 1.0 0.0 0.0 0.0)
+      (:z_offset 0.000)
+      (:mesh_scale 1.6 1.6 1.6)
+      (:min_reference_distance 0.02)
+      (:pin_targets true)
+    )
+    (:object_shape
+      (:enabled false)
+      (:mode none)
+      (:target akita_black_bowl_1)
+      (:mesh_scale 1.0 1.0 1.0)
+    )
+    (:initial_pose
+      (:enabled false)
+      (:mode none)
+      (:target akita_black_bowl_1)
+      (:delta_xy 0.0 0.0)
+      (:min_delta_norm 0.0)
+      (:yaw 0.0)
+    )
+  )
+
+)

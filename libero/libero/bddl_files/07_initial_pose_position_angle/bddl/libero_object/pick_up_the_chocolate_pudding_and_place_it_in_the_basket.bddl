@@ -1,0 +1,167 @@
+(define (problem LIBERO_Floor_Manipulation)
+  (:domain robosuite)
+  (:language Pick the chocolate pudding and place it in the basket)
+    (:regions
+      (bin_region
+          (:target floor)
+          (:ranges (
+              (-0.01 0.25 0.01 0.27)
+            )
+          )
+      )
+      (target_object_region
+          (:target floor)
+          (:ranges (
+              (-0.145 -0.265 -0.095 -0.215)
+            )
+          )
+      )
+      (other_object_region_0
+          (:target floor)
+          (:ranges (
+              (0.025 -0.125 0.07500000000000001 -0.07500000000000001)
+            )
+          )
+      )
+      (other_object_region_1
+          (:target floor)
+          (:ranges (
+              (-0.175 0.034999999999999996 -0.125 0.08499999999999999)
+            )
+          )
+      )
+      (other_object_region_2
+          (:target floor)
+          (:ranges (
+              (0.07500000000000001 -0.225 0.125 -0.17500000000000002)
+            )
+          )
+      )
+      (other_object_region_3
+          (:target floor)
+          (:ranges (
+              (0.125 0.0049999999999999975 0.175 0.055)
+            )
+          )
+      )
+      (other_object_region_4
+          (:target floor)
+          (:ranges (
+              (-0.225 -0.10500000000000001 -0.17500000000000002 -0.055)
+            )
+          )
+      )
+      (contain_region
+          (:target basket_1)
+      )
+    )
+
+  (:fixtures
+    floor - floor
+  )
+
+  (:objects
+    chocolate_pudding_1 - chocolate_pudding
+    basket_1 - basket
+    orange_juice_1 - orange_juice
+    bbq_sauce_1 - bbq_sauce
+    ketchup_1 - ketchup
+    salad_dressing_1 - salad_dressing
+    alphabet_soup_1 - alphabet_soup
+  )
+
+  (:obj_of_interest
+    chocolate_pudding_1
+    basket_1
+  )
+
+  (:init
+    (On chocolate_pudding_1 floor_target_object_region)
+    (On orange_juice_1 floor_other_object_region_0)
+    (On bbq_sauce_1 floor_other_object_region_1)
+    (On ketchup_1 floor_other_object_region_2)
+    (On salad_dressing_1 floor_other_object_region_3)
+    (On alphabet_soup_1 floor_other_object_region_4)
+    (On basket_1 floor_bin_region)
+  )
+
+  (:goal
+    (And (In chocolate_pudding_1 basket_1_contain_region))
+  )
+
+  (:perturbation_config
+    (:case initial_pose_position_angle)
+    (:category initial_pose_position_angle)
+    (:source_suite libero_object)
+    (:source_task pick_up_the_chocolate_pudding_and_place_it_in_the_basket)
+    (:bddl_only true)
+    (:detail shift_the_initial_position_and_yaw_of_the_target_object)
+    (:lighting
+      (:enabled false)
+      (:mode none)
+      (:ambient 1.0)
+      (:diffuse 1.0)
+      (:specular 1.0)
+    )
+    (:observation
+      (:enabled false)
+      (:mode none)
+      (:brightness 1.0)
+      (:sigma 0.0)
+    )
+    (:camera
+      (:enabled false)
+      (:mode none)
+      (:name agentview)
+      (:pos 0.0 0.0 0.0)
+      (:quat 1.0 0.0 0.0 0.0)
+    )
+    (:runtime_move
+      (:enabled false)
+      (:mode none)
+      (:object chocolate_pudding_1)
+      (:step 0)
+      (:delta_xy 0.0 0.0)
+      (:min_delta_norm 0.0)
+    )
+    (:object_appearance
+      (:enabled false)
+      (:mode none)
+      (:targets basket_1)
+      (:rgba 0.35 0.34 0.32 1.0)
+      (:override_material_rgba false)
+      (:disable_material_texture false)
+      (:apply_visible_geom_rgba false)
+    )
+    (:object_placement
+      (:enabled false)
+      (:mode none)
+      (:reference chocolate_pudding_1)
+      (:front_direction 1.0 0.0)
+      (:targets black_book_occluder_1)
+      (:offsets_xy (
+        (0.0 0.0)
+      ))
+      (:target_quat 1.0 0.0 0.0 0.0)
+      (:z_offset 0.0)
+      (:mesh_scale 1.0 1.0 1.0)
+      (:min_reference_distance 0.0)
+      (:pin_targets false)
+    )
+    (:object_shape
+      (:enabled false)
+      (:mode none)
+      (:target chocolate_pudding_1)
+      (:mesh_scale 1.0 1.0 1.0)
+    )
+    (:initial_pose
+      (:enabled true)
+      (:mode delta_xy_yaw)
+      (:target chocolate_pudding_1)
+      (:delta_xy 0.17 -0.06)
+      (:min_delta_norm 0.18)
+      (:yaw 0.7853981633974483)
+    )
+  )
+
+)

@@ -1,0 +1,11 @@
+# Minimal environment-side dependencies verified with Python 3.8 in WSL.
+# Install CPU-only PyTorch separately before this file; no CUDA package is needed.
+-r requirements-eval.txt
+
+numpy==1.24.4
+robosuite==1.4.0
+mujoco==3.2.3
+bddl==1.0.1
+easydict==1.9
+matplotlib==3.5.3
+PyYAML>=6,<7

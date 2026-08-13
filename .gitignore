@@ -12,6 +12,8 @@ clip/
 gpt/
 bert/
 logs/
+.runtime/
+/libero_data/
 
 *.mp4
 libero.egg-info/
