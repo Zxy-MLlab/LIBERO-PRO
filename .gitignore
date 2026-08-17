@@ -12,7 +12,11 @@ clip/
 gpt/
 bert/
 logs/
+.runtime/
+/libero_data/
 
 *.mp4
 libero.egg-info/
 .vscode/
+libero/libero/bddl_files/libero_*_env
+libero/libero/init_files/libero_*_env

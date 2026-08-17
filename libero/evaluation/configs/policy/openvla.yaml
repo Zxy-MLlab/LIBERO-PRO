@@ -1,0 +1,22 @@
+name: openvla
+client: openvla
+connection:
+  # Local endpoint. With `ssh -L 8000:localhost:8000 allinai2`, do not
+  # replace this with the remote server's 0.0.0.0 bind address.
+  base_url: http://127.0.0.1:8000
+  timeout_seconds: 120
+inference:
+  # Must exactly match a LIBERO key in the remote checkpoint's norm_stats.
+  # The currently deployed LIBERO-10 checkpoint exposes "libero_10".
+  unnorm_key: libero_10
+adapter:
+  # Matches OpenVLA's LIBERO image path: rotate 180 degrees, JPEG round trip,
+  # then resize to 224px. Official LIBERO fine-tuned checkpoints use the
+  # random-crop augmentation, so reproduce it with a deterministic center crop.
+  image_preprocess: official_libero
+  center_crop: true
+action:
+  type: delta_ee
+  dim: 7
+  controller: OSC_POSE
+  control_frequency_hz: 20

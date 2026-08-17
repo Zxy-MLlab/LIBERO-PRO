@@ -1,0 +1,173 @@
+(define (problem LIBERO_Living_Room_Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language put both the alphabet soup and the cream cheese box in the basket)
+    (:regions
+      (basket_init_region
+          (:target living_room_table)
+          (:ranges (
+              (-0.01 0.25 0.01 0.27)
+            )
+          )
+          (:yaw_rotation (
+              (0.0 0.0)
+            )
+          )
+      )
+      (alphabet_soup_init_region
+          (:target living_room_table)
+          (:ranges (
+              (0.025 -0.125 0.07500000000000001 -0.07500000000000001)
+            )
+          )
+          (:yaw_rotation (
+              (0.0 0.0)
+            )
+          )
+      )
+      (cream_cheese_init_region
+          (:target living_room_table)
+          (:ranges (
+              (-0.175 0.034999999999999996 -0.125 0.08499999999999999)
+            )
+          )
+          (:yaw_rotation (
+              (0.0 0.0)
+            )
+          )
+      )
+      (tomato_sauce_init_region
+          (:target living_room_table)
+          (:ranges (
+              (0.07500000000000001 -0.225 0.125 -0.17500000000000002)
+            )
+          )
+          (:yaw_rotation (
+              (0.0 0.0)
+            )
+          )
+      )
+      (ketchup_init_region
+          (:target living_room_table)
+          (:ranges (
+              (-0.225 -0.175 -0.17500000000000002 -0.125)
+            )
+          )
+          (:yaw_rotation (
+              (0.0 0.0)
+            )
+          )
+      )
+      (contain_region
+          (:target basket_1)
+      )
+    )
+
+  (:fixtures
+    living_room_table - living_room_table
+  )
+
+  (:objects
+    alphabet_soup_1 - alphabet_soup
+    cream_cheese_1 - cream_cheese
+    tomato_sauce_1 - tomato_sauce
+    ketchup_1 - ketchup
+    basket_1 - basket
+  )
+
+  (:obj_of_interest
+    alphabet_soup_1
+    cream_cheese_1
+    basket_1
+  )
+
+  (:init
+    (On alphabet_soup_1 living_room_table_alphabet_soup_init_region)
+    (On cream_cheese_1 living_room_table_cream_cheese_init_region)
+    (On tomato_sauce_1 living_room_table_tomato_sauce_init_region)
+    (On ketchup_1 living_room_table_ketchup_init_region)
+    (On basket_1 living_room_table_basket_init_region)
+  )
+
+  (:goal
+    (And (In alphabet_soup_1 basket_1_contain_region) (In cream_cheese_1 basket_1_contain_region))
+  )
+
+  (:perturbation_config
+    (:case runtime_object_move)
+    (:category runtime_object_move)
+    (:source_suite libero_10)
+    (:source_task LIVING_ROOM_SCENE1_put_both_the_alphabet_soup_and_the_cream_cheese_box_in_the_basket)
+    (:bddl_only true)
+    (:detail move_the_task_target_object_during_the_rollout)
+    (:lighting
+      (:enabled false)
+      (:mode none)
+      (:ambient 1.0)
+      (:diffuse 1.0)
+      (:specular 1.0)
+    )
+    (:observation
+      (:enabled false)
+      (:mode none)
+      (:brightness 1.0)
+      (:sigma 0.0)
+    )
+    (:camera
+      (:enabled false)
+      (:mode none)
+      (:name agentview)
+      (:pos 0.0 0.0 0.0)
+      (:quat 1.0 0.0 0.0 0.0)
+    )
+    (:runtime_move
+      (:enabled true)
+      (:mode qpos_delta_xy)
+      (:object alphabet_soup_1)
+      (:step 80)
+      (:trigger near_grasp)
+      (:distance_threshold 0.09)
+      (:fallback_step 160)
+      (:delta_xy 0.17 0.06)
+      (:min_delta_norm 0.18)
+    )
+    (:object_appearance
+      (:enabled false)
+      (:mode none)
+      (:targets basket_1)
+      (:rgba 0.30 0.20 0.12 1.0)
+      (:override_material_rgba false)
+      (:disable_material_texture false)
+      (:apply_visible_geom_rgba false)
+    )
+    (:object_placement
+      (:enabled false)
+      (:mode none)
+      (:reference alphabet_soup_1)
+      (:front_direction 1.0 0.0)
+      (:targets black_book_occluder_1)
+      (:offsets_xy (
+        (0.0 0.0)
+      ))
+      (:target_quat 1.0 0.0 0.0 0.0)
+      (:z_offset 0.0)
+      (:mesh_scale 1.0 1.0 1.0)
+      (:min_reference_distance 0.0)
+      (:pin_targets false)
+    )
+    (:object_shape
+      (:enabled false)
+      (:mode none)
+      (:target alphabet_soup_1)
+      (:mesh_scale 1.0 1.0 1.0)
+    )
+    (:initial_pose
+      (:enabled false)
+      (:mode none)
+      (:target alphabet_soup_1)
+      (:delta_xy 0.0 0.0)
+      (:min_delta_norm 0.0)
+      (:yaw 0.0)
+    )
+  )
+
+)

@@ -1,0 +1,9 @@
+[submodule "models/openpi"]
+	path = models/openpi
+	url = https://github.com/Physical-Intelligence/openpi.git
+[submodule "models/GR00T"]
+	path = models/GR00T
+	url = https://github.com/NVIDIA/Isaac-GR00T.git
+[submodule "models/openvla"]
+	path = models/openvla
+	url = https://github.com/openvla/openvla.git

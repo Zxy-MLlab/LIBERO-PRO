@@ -1,0 +1,144 @@
+(define (problem LIBERO_Kitchen_Tabletop_Manipulation)
+  (:domain robosuite)
+  (:language put both moka pots on the stove)
+    (:regions
+      (flat_stove_init_region
+          (:target kitchen_table)
+          (:ranges (
+              (-0.21000000000000002 -0.21000000000000002 -0.19 -0.19)
+            )
+          )
+          (:yaw_rotation (
+              (0.0 0.0)
+            )
+          )
+      )
+      (moka_pot_right_init_region
+          (:target kitchen_table)
+          (:ranges (
+              (-0.07500000000000001 0.225 -0.025 0.275)
+            )
+          )
+          (:yaw_rotation (
+              (0.0 0.0)
+            )
+          )
+      )
+      (moka_pot_left_init_region
+          (:target kitchen_table)
+          (:ranges (
+              (0.025 0.025 0.07500000000000001 0.07500000000000001)
+            )
+          )
+          (:yaw_rotation (
+              (0.0 0.0)
+            )
+          )
+      )
+      (cook_region
+          (:target flat_stove_1)
+      )
+    )
+
+  (:fixtures
+    kitchen_table - kitchen_table
+    flat_stove_1 - flat_stove
+  )
+
+  (:objects
+    moka_pot_1 moka_pot_2 - moka_pot
+  )
+
+  (:obj_of_interest
+    moka_pot_1
+    moka_pot_2
+    flat_stove_1
+  )
+
+  (:init
+    (On flat_stove_1 kitchen_table_flat_stove_init_region)
+    (On moka_pot_1 kitchen_table_moka_pot_right_init_region)
+    (On moka_pot_2 kitchen_table_moka_pot_left_init_region)
+    (Turnon flat_stove_1)
+  )
+
+  (:goal
+    (And (On moka_pot_1 flat_stove_1_cook_region) (On moka_pot_2 flat_stove_1_cook_region) (Turnon flat_stove_1))
+  )
+
+  (:perturbation_config
+    (:case object_texture)
+    (:category object_texture)
+    (:source_suite libero_10)
+    (:source_task KITCHEN_SCENE8_put_both_moka_pots_on_the_stove)
+    (:bddl_only true)
+    (:detail make_goal_destination_background_like_without_changing_task_semantics)
+    (:lighting
+      (:enabled false)
+      (:mode none)
+      (:ambient 1.0)
+      (:diffuse 1.0)
+      (:specular 1.0)
+    )
+    (:observation
+      (:enabled false)
+      (:mode none)
+      (:brightness 1.0)
+      (:sigma 0.0)
+    )
+    (:camera
+      (:enabled false)
+      (:mode none)
+      (:name agentview)
+      (:pos 0.0 0.0 0.0)
+      (:quat 1.0 0.0 0.0 0.0)
+    )
+    (:runtime_move
+      (:enabled false)
+      (:mode none)
+      (:object moka_pot_1)
+      (:step 0)
+      (:delta_xy 0.0 0.0)
+      (:min_delta_norm 0.0)
+    )
+    (:object_appearance
+      (:enabled true)
+      (:mode table_like_material)
+      (:targets flat_stove_1)
+      (:rgba 0.72 0.63 0.50 1.0)
+      (:override_material_rgba true)
+      (:disable_material_texture true)
+      (:apply_visible_geom_rgba true)
+    )
+    (:object_placement
+      (:enabled false)
+      (:mode none)
+      (:reference moka_pot_1)
+      (:front_direction 1.0 0.0)
+      (:targets black_book_occluder_1)
+      (:offsets_xy (
+        (0.0 0.0)
+      ))
+      (:target_quat 1.0 0.0 0.0 0.0)
+      (:z_offset 0.0)
+      (:mesh_scale 1.0 1.0 1.0)
+      (:min_reference_distance 0.0)
+      (:pin_targets false)
+    )
+    (:object_shape
+      (:enabled false)
+      (:mode none)
+      (:target moka_pot_1)
+      (:mesh_scale 1.0 1.0 1.0)
+    )
+    (:initial_pose
+      (:enabled false)
+      (:mode none)
+      (:target moka_pot_1)
+      (:delta_xy 0.0 0.0)
+      (:min_delta_norm 0.0)
+      (:yaw 0.0)
+    )
+  )
+
+)

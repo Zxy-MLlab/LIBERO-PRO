@@ -1,0 +1,15 @@
+name: gr00t
+client: gr00t
+connection:
+  host: 127.0.0.1
+  port: 8001
+  timeout_seconds: 30
+  # api_token: null
+inference:
+  # Must match GR00T's LIBERO_PANDA sim-policy-wrapper action ordering.
+  action_keys: [x, y, z, roll, pitch, yaw, gripper]
+action:
+  type: delta_ee
+  dim: 7
+  controller: OSC_POSE
+  control_frequency_hz: 20

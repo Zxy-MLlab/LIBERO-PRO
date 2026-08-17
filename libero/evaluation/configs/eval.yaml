@@ -1,0 +1,40 @@
+defaults:
+  - policy: pi05
+  - _self_
+benchmark:
+  evaluation_config_path: evaluation_config.yaml
+  task_ids: [0]
+  episodes_per_task: 1
+  init_state_ids: []
+  seed: 7
+rollout:
+  execute_horizon: 5
+  warmup_steps: 10
+  max_steps: 300
+  episode_timeout_seconds: 50
+environment:
+  render_backend: egl
+recording:
+  enabled: true
+  directory: ${output.directory}/videos
+  camera_height: 256
+  camera_width: 256
+  fps: 10
+  stride: 2
+live_preview:
+  enabled: true
+  host: 127.0.0.1
+  port: 8765
+  refresh_hz: 10
+  stride: 1
+diagnostics:
+  action_trace:
+    enabled: true
+    directory: ${output.directory}/action_traces
+output:
+  directory: ${hydra:runtime.output_dir}/evaluation
+  episodes_file: episodes.jsonl
+  summary_file: summary.json
+hydra:
+  job:
+    chdir: false

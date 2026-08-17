@@ -1,6 +1,7 @@
-bddl_files_path: "./LIBERO-PRO/libero/libero/bddl_files/"
-script_path: "./LIBERO-PRO/notebooks/generate_init_states.py"
-init_file_dir: "./LIBERO-PRO/libero/libero/init_files/"
+bddl_files_path: "./libero/libero/bddl_files/"
+script_path: "./notebooks/generate_init_states.py"
+init_file_dir: "./libero/libero/init_files/"
+task_suite_name: libero_10
 
 use_environment: true
 use_swap: false

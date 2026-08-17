@@ -1,0 +1,13 @@
+name: pi05
+client: openpi
+connection:
+  host: 127.0.0.1
+  port: 8001
+  timeout_seconds: 30
+inference:
+  image_size: 224
+action:
+  type: delta_ee
+  dim: 7
+  controller: OSC_POSE
+  control_frequency_hz: 20
